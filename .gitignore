@@ -1,4 +1,5 @@
 .settings/*
 .*
-!.gitignore
 target/*
+/target/*
+/bin/*
