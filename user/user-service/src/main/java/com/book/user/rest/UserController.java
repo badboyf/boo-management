@@ -38,7 +38,7 @@ public class UserController implements UserApi {
 
 	@Override
 	public UserDTO comparePassword(@RequestBody UserDTO userDTO) {
-		User user = userRepository.findOne(userDTO.getId());
+		User user = userRepository.getByUserName(userDTO.getUserName());
 		if (user == null) {
 			throw new RunException(ExceptionConstant.USER_NOT_FOUND);
 		} else if (!userDTO.getPassword().equals(user.getPassword())) {

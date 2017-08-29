@@ -15,6 +15,7 @@ public class UserAssemble {
 		userDTO.setRealName(user.getRealName());
 		userDTO.setVersion(user.getVersion());
 		userDTO.setJob(user.getJob());
+		userDTO.setDepartment(user.getDepartment());
 
 		return userDTO;
 	}

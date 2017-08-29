@@ -18,7 +18,7 @@ public class UserRepositoryImpl implements UserCustormRepository {
 
 	public User getByUserNameAndPassword(String userName, String password) {
 		Query query = new Query();
-		Criteria criteria = Criteria.where("username").is(userName).and("password").is(password);
+		Criteria criteria = Criteria.where("userName").is(userName).and("password").is(password);
 		query.addCriteria(criteria);
 
 		List<User> users = mongoTemplate.find(query, User.class);
