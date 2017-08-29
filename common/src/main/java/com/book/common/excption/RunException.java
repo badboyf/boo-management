@@ -1,4 +1,6 @@
-package com.book.user.exception;
+package com.book.common.excption;
+
+import com.book.common.constant.ExceptionConstant;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
