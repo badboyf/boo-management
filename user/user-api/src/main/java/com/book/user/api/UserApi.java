@@ -9,15 +9,15 @@ import com.book.user.dto.UserDTO;
 @RequestMapping(value = "/user", headers = "Accept=application/json", produces = "application/json")
 public interface UserApi {
 
-	@RequestMapping(value = "register", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public UserDTO register(@RequestBody UserDTO user);
 
-	@RequestMapping(value = "login", method =RequestMethod.POST)
+	@RequestMapping(value = "/login", method =RequestMethod.POST)
 	public UserDTO login(@RequestBody UserDTO user);
 
-	@RequestMapping(value = "comparePassword", method = RequestMethod.PUT)
+	@RequestMapping(value = "/comparePassword", method = RequestMethod.PUT)
 	public UserDTO comparePassword(@RequestBody UserDTO user);
 
-	@RequestMapping(value = "updatePassword", method = RequestMethod.PUT)
+	@RequestMapping(value = "/updatePassword", method = RequestMethod.PUT)
 	public void updatePassword(@RequestBody UserDTO user);
 }

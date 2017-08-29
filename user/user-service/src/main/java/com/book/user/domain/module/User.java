@@ -21,6 +21,7 @@ public class User {
 	private String realName;
 	private String department;
 	private String avatar;
+	private String job;
 
 	@Version
 	private Integer version;
@@ -34,5 +35,6 @@ public class User {
 		this.password = userDTO.getPassword();
 		this.department = userDTO.getDepartment();
 		this.avatar = userDTO.getAvatar();
+		this.job = userDTO.getJob();
 	}
 }
