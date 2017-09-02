@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.query.Query;
 
 import com.book.common.constant.ExceptionConstant;
 import com.book.common.excption.RunException;
-import com.book.user.domain.module.User;
+import com.book.user.domain.model.User;
 import com.book.user.domain.repository.UserCustormRepository;
 
 public class UserRepositoryImpl implements UserCustormRepository {

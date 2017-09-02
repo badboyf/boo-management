@@ -18,4 +18,9 @@ public class RunException extends RuntimeException {
 		this.code = constant.getCode();
 		this.reason = constant.getMessage();
 	}
+
+	public RunException(ExceptionConstant constant, String reason) {
+		this.code = constant.getCode();
+		this.reason = constant.getMessage() + "【reason: " + reason + "】";
+	}
 }

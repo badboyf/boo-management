@@ -1,6 +1,6 @@
 package com.book.user.domain.assemble;
 
-import com.book.user.domain.module.User;
+import com.book.user.domain.model.User;
 import com.book.user.dto.UserDTO;
 
 public class UserAssemble {

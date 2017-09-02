@@ -12,6 +12,8 @@
 		<module>test-project</module>
     <module>eureka-server</module>
     <module>test-eureka-provider</module>
+    <module>book</module>
+    <module>application</module>
   </modules>
 
 	<parent>

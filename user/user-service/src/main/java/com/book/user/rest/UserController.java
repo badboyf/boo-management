@@ -9,7 +9,7 @@ import com.book.common.excption.RunException;
 import com.book.user.api.UserApi;
 import com.book.user.domain.assemble.UserAssemble;
 import com.book.user.domain.factory.UserFactory;
-import com.book.user.domain.module.User;
+import com.book.user.domain.model.User;
 import com.book.user.domain.repository.UserRepository;
 import com.book.user.dto.UserDTO;
 

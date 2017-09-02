@@ -1,6 +1,8 @@
 package com.book.common.constant;
 
 public enum ExceptionConstant {
+	BOOK_NOT_EXIST("006", "书不存在"),
+	BOOK_ALREADY_EXIST("005", "书已经存在"),
 	USER_ALREADY_EXIST("004", "用户已经存在"),
 	PASSWORD_WRONG("003", "密码错误"),
 	USER_NOT_FOUND("002", "未根据id获取用户信息"),

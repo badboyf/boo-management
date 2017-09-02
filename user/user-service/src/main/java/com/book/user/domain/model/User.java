@@ -1,4 +1,4 @@
-package com.book.user.domain.module;
+package com.book.user.domain.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
