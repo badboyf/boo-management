@@ -33,7 +33,7 @@ public class UserRepositoryImpl implements UserCustormRepository {
 
 	@Override
 	public User getByUserName(String userName) {
-		Query query = new Query(Criteria.where("username").is(userName));
+		Query query = new Query(Criteria.where("userName").is(userName));
 		List<User> users = mongoTemplate.find(query, User.class);
 		if (users.size() > 1) {
 			throw new RunException(ExceptionConstant.USERNAME_PASSWORD_MORE_THAN_ONE);
