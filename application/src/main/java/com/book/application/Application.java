@@ -24,7 +24,7 @@ public class Application {
 	}
 	
 	@Bean
-	public Docket fzkApi() {
+	public Docket bookApi() {
 		return new Docket(DocumentationType.SWAGGER_2).groupName("book")
 				.apiInfo(new ApiInfoBuilder().title("book").description("Create by fzk").build()).select().paths(regex("/book.*")).build();
 	}
