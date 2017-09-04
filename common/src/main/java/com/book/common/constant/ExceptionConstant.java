@@ -1,6 +1,7 @@
 package com.book.common.constant;
 
 public enum ExceptionConstant {
+	UPLOAD_FILE_ERROR("007", "上传文件失败"),
 	BOOK_NOT_EXIST("006", "书不存在"),
 	BOOK_ALREADY_EXIST("005", "书已经存在"),
 	USER_ALREADY_EXIST("004", "用户已经存在"),
