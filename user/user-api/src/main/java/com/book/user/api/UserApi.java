@@ -1,5 +1,6 @@
 package com.book.user.api;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,4 +21,7 @@ public interface UserApi {
 
 	@RequestMapping(value = "/updatePassword", method = RequestMethod.PUT)
 	public void updatePassword(@RequestBody UserDTO user);
+
+	@RequestMapping(value = "/{userName}", method = RequestMethod.GET)
+	public UserDTO getUser(@PathVariable String userName);
 }

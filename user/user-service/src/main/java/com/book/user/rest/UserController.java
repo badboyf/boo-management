@@ -1,6 +1,7 @@
 package com.book.user.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,4 +56,12 @@ public class UserController implements UserApi {
 		userRepository.save(user);
 	}
 
+	@Override
+	public UserDTO getUser(@PathVariable String userName) {
+		User existUser = userRepository.getByUserName(userName);
+		if (existUser == null) {
+			throw new RunException(ExceptionConstant.USER_NOT_FOUND);
+		}
+		return UserAssemble.assemble(existUser);
+	}
 }
