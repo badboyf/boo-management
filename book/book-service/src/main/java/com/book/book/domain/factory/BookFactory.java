@@ -8,6 +8,7 @@ import com.book.book.dto.BookDTO;
 public class BookFactory {
 	public static Book factory(BookDTO bookDTO) {
 		Book book = new Book();
+		book.setId(bookDTO.getId());
 		book.setAuthor(bookDTO.getAuthor());
 		book.setBookPDF(bookDTO.getBookPDF());
 		book.setCatalog(bookDTO.getCatalog());

@@ -9,6 +9,7 @@ public class BookAssemble {
 			return null;
 		}
 		BookDTO bookDTO = new BookDTO();
+		bookDTO.setId(book.getId());
 		bookDTO.setAuthor(book.getAuthor());
 		bookDTO.setBookPDF(book.getBookPDF());
 		bookDTO.setCatalog(book.getCatalog());

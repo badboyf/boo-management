@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.book.api.BookApi;
@@ -25,7 +26,7 @@ public class BookController implements BookApi {
 	@Override
 	public BookDTO createOrUpdateBook(@RequestBody BookDTO bookDTO) {
 		Book result = null;
-		if (bookDTO.getIdentityNumber() == null) {
+		if (bookDTO.getId() == null) {
 			result = createBook(bookDTO);
 		} else {
 			result = updateBook(bookDTO);
@@ -44,7 +45,7 @@ public class BookController implements BookApi {
 	}
 
 	private Book updateBook(BookDTO bookDTO) {
-		Book book = bookRepository.findOne(bookDTO.getIdentityNumber());
+		Book book = bookRepository.findOne(bookDTO.getId());
 		if (book == null) {
 			throw new RunException(ExceptionConstant.BOOK_NOT_EXIST);
 		}
@@ -54,8 +55,8 @@ public class BookController implements BookApi {
 	}
 
 	@Override
-	public BookDTO getById(@PathVariable String identityNumber) {
-		Book book = bookRepository.findOne(identityNumber);
+	public BookDTO getById(@PathVariable String id) {
+		Book book = bookRepository.findOne(id);
 		if (book == null) {
 			throw new RunException(ExceptionConstant.BOOK_NOT_EXIST);
 		}
@@ -63,14 +64,24 @@ public class BookController implements BookApi {
 	}
 
 	@Override
-	public List<BookDTO> getBooks() {
-		List<Book> books = bookRepository.findAll();
+	public List<BookDTO> getBooks(@RequestParam(name = "name", required = false) String name) {
+		List<Book> books = bookRepository.find(name);
+		books.sort(new Book());
 		List<BookDTO> bookDTOs = new ArrayList<BookDTO>();
 		for (Book book : books) {
 			bookDTOs.add(BookAssemble.assemble(book));
 		}
 
 		return bookDTOs;
+	}
+
+	@Override
+	public void deleteById(@PathVariable(value = "id") String id) {
+		Book book = bookRepository.findOne(id);
+		if (book == null) {
+			throw new RunException(ExceptionConstant.BOOK_NOT_EXIST);
+		}
+		bookRepository.delete(book);
 	}
 
 }

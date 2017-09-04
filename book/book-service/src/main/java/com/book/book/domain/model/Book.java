@@ -1,5 +1,6 @@
 package com.book.book.domain.model;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -12,8 +13,11 @@ import lombok.Data;
 
 @Document(collection = "book")
 @Data
-public class Book {
+public class Book implements Comparator<Book> {
 	@Id
+	private String id;
+
+	@Indexed
 	private String identityNumber;
 	@Indexed
 	private String name;
@@ -40,5 +44,11 @@ public class Book {
 		this.images = book.getImages();
 		this.bookPDF = book.getBookPDF();
 		this.updateAt = new Date();
+	}
+
+	@Override
+	public int compare(Book o1, Book o2) {
+
+		return (int) (o2.getCreateAt().getTime() - o1.getCreateAt().getTime());
 	}
 }
