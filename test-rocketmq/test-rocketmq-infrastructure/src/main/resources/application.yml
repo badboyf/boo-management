@@ -1,0 +1,13 @@
+rocketmq:
+  producer:
+    groupName: testGroup
+    namesrvAddr: 192.168.133.130:9876
+    instanceName: testProducer
+    maxMessageSize: 131072 # 1024*128
+    sendMsgTimeout: 10000
+  consumer:
+    namesrvAddr: 192.168.133.130:9876
+    groupName: testGroup
+    consumeThreadMin: 20
+    consumeThreadMax: 64
+  producerSize: 1

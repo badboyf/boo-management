@@ -1,0 +1,16 @@
+server: 
+  port: 9005
+
+rocketmq:
+  producer:
+    groupName: testGroup
+    namesrvAddr: 192.168.133.130:9876
+    instanceName: testProducer
+    maxMessageSize: 131072
+    sendMsgTimeout: 10000
+  consumer:
+    groupName: testGroup
+    namesrvAddr: 192.168.133.130:9876
+    consumeThreadMin: 20
+    consumeThreadMax: 64
+  producerSize: 1

@@ -1,0 +1,16 @@
+rocketmq.producer.groupName=testGroup
+rocketmq.producer.namesrvAddr= 192.168.133.130:9876
+rocketmq.producer.instanceName=testProducer
+rocketmq.producer.topic=topic-test
+rocketmq.producer.tag=tag-test
+rocketmq.producer.key=key-test
+rocketmq.producer.maxMessageSize=131072
+rocketmq.producer.sendMsgTimeout=10000
+
+rocketmq.consumer.namesrvAddr=192.168.133.130=9876
+rocketmq.consumer.groupName=testGroup
+rocketmq.consumer.topic=topic-test
+rocketmq.consumer.tag=tag-test
+rocketmq.consumer.consumeThreadMin=20
+rocketmq.consumer.consumeThreadMax=64
+

@@ -16,6 +16,7 @@
     <module>application</module>
     <module>file-upload</module>
     <module>eureka-test</module>
+    <module>test-rocketmq</module>
 	</modules>
 
 	<parent>
