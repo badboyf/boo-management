@@ -34,7 +34,10 @@ public class FileUploaderController implements FileUploaderApi {
 	}
 
 	private File generateDestFile(String fileName) {
-		String lastStr = fileName.substring(fileName.lastIndexOf("."));
+		String lastStr = "";
+		if (fileName.lastIndexOf(".") != -1) {
+			lastStr = fileName.substring(fileName.lastIndexOf("."));
+		}
 		String fileDir = BASE_DIR + generateFileName() + lastStr;
 		File dest = new File(fileDir);
 		if (!dest.getParentFile().exists()) {

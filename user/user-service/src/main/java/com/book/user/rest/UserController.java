@@ -34,6 +34,10 @@ public class UserController implements UserApi {
 	public UserDTO login(@RequestBody UserDTO userDTO) {
 		User user = userRepository.getByUserNameAndPassword(userDTO.getUserName(), userDTO.getPassword());
 		System.out.println("@@@@@@@@@@@@");
+		if (user == null) {
+			throw new RunException(ExceptionConstant.PASSWORD_WRONG);
+		}
+		
 		return UserAssemble.assemble(user);
 	}
 
