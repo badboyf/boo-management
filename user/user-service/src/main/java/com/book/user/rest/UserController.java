@@ -33,7 +33,7 @@ public class UserController implements UserApi {
 	@Override
 	public UserDTO login(@RequestBody UserDTO userDTO) {
 		User user = userRepository.getByUserNameAndPassword(userDTO.getUserName(), userDTO.getPassword());
-
+		System.out.println("@@@@@@@@@@@@");
 		return UserAssemble.assemble(user);
 	}
 

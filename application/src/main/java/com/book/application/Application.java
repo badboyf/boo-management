@@ -22,7 +22,7 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	
+
 	@Bean
 	public Docket bookApi() {
 		return new Docket(DocumentationType.SWAGGER_2).groupName("book")
@@ -33,6 +33,12 @@ public class Application {
 	public Docket userApi() {
 		return new Docket(DocumentationType.SWAGGER_2).groupName("user")
 				.apiInfo(new ApiInfoBuilder().title("user").description("Create by fzk").build()).select().paths(regex("/user.*")).build();
+	}
+
+	@Bean
+	public Docket fileApi() {
+		return new Docket(DocumentationType.SWAGGER_2).groupName("file")
+				.apiInfo(new ApiInfoBuilder().title("file").description("Create by fzk").build()).select().paths(regex("/file.*")).build();
 	}
 
 	@Bean
