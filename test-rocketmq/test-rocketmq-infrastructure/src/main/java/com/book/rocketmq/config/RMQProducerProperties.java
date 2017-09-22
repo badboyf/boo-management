@@ -7,9 +7,11 @@ import lombok.Data;
 @Data
 @ConfigurationProperties("rocketmq.producer")
 public class RMQProducerProperties {
-	private String groupName;
+	private String group;
 	private String namesrvAddr;
 	private String instanceName;
-	private int maxMessageSize;
-	private int sendMsgTimeout;
+	private Integer maxMessageSize;
+	private Integer sendMsgTimeout;
+	private Integer retryTimes;
+	private Integer defaultTopicQueueNums;
 }

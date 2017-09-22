@@ -1,7 +1,5 @@
 package com.book.rocketmq;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +8,6 @@ import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.annotation.AnnotationUtils;
 
@@ -30,8 +27,8 @@ public class RMQConfig {
 	@Autowired
 	RMQProducerProperties producerProperties;
 
-	@Value("${rocketmq.producerSize}")
-	int producerSize;
+	// @Value("${rocketmq.producerSize}")
+	// int producerSize;
 
 	private String[] packages;
 
@@ -47,23 +44,19 @@ public class RMQConfig {
 
 	public void startRMQConsumer() throws Exception {
 		Set<Class<?>> rmqConsumerClasses = Scanner.scan(packages, RMQConsumer.class);
-
 		for (Class<?> rmqConsumerClass : rmqConsumerClasses) {
 			RMQConsumer rmqConsumer = AnnotationUtils.findAnnotation(rmqConsumerClass, RMQConsumer.class);
 			Class<? extends IMQMessage<?>> mqMessage = rmqConsumer.message();
-
-			// Type type = rmqConsumerClass.getGenericSuperclass();
-			// ParameterizedType parameterizedType = (ParameterizedType) type;
-			// Class<?> class1 =
-			// parameterizedType.getActualTypeArguments()[0].getClass();
+			String group = rmqConsumer.group();
 
 			RMQConsumerListenner<?> listenner = (RMQConsumerListenner<?>) rmqConsumerClass.newInstance();
-			start(mqMessage.newInstance(), listenner);
+			start(group, mqMessage.newInstance(), listenner);
 		}
+
 	}
 
-	public void start(IMQMessage<?> mqMessage, RMQConsumerListenner<?> listenner) throws Exception {
-		DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(producerProperties.getGroupName());
+	public void start(String group, IMQMessage<?> mqMessage, RMQConsumerListenner<?> listenner) throws Exception {
+		DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(group);
 		consumer.setNamesrvAddr(consumerProperties.getNamesrvAddr());
 		consumer.setConsumeThreadMin(consumerProperties.getConsumeThreadMin());
 		consumer.setConsumeThreadMax(consumerProperties.getConsumeThreadMax());
@@ -73,27 +66,28 @@ public class RMQConfig {
 			consumer.subscribe(mqMessage.getTopic(), mqMessage.getTag());
 			consumer.start();
 		} catch (MQClientException e) {
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}
 
 	public void startRMQProducer() {
-		List<DefaultMQProducer> producers = new ArrayList<DefaultMQProducer>();
+		DefaultMQProducer producer = new DefaultMQProducer(producerProperties.getGroup());
+		producer.setNamesrvAddr(producerProperties.getNamesrvAddr());
+		producer.setInstanceName(producerProperties.getInstanceName());
+		producer.setMaxMessageSize(producerProperties.getMaxMessageSize());
+		producer.setSendMsgTimeout(producerProperties.getSendMsgTimeout());
+		producer.setRetryTimesWhenSendAsyncFailed(producerProperties.getRetryTimes());
+		producer.setRetryTimesWhenSendFailed(producerProperties.getRetryTimes());
+		producer.setDefaultTopicQueueNums(producerProperties.getDefaultTopicQueueNums());
 
-		for (int i = 0; i < producerSize; i++) {
-			DefaultMQProducer producer = new DefaultMQProducer(producerProperties.getGroupName());
-			producer.setNamesrvAddr(producerProperties.getNamesrvAddr());
-			producer.setInstanceName(producerProperties.getInstanceName());
-			producer.setMaxMessageSize(producerProperties.getMaxMessageSize());
-			producer.setSendMsgTimeout(producerProperties.getSendMsgTimeout());
-			try {
-				producer.start();
-			} catch (MQClientException e) {
-				e.printStackTrace();
-			}
-			producers.add(producer);
+		try {
+			producer.start();
+		} catch (MQClientException e) {
+			e.printStackTrace();
 		}
 
-		ProducerHolder.setProducers(producers);
+		ProducerHolder.setProducer(producer);
+
 	}
 }

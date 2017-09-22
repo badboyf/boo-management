@@ -7,7 +7,6 @@ rocketmq:
     sendMsgTimeout: 10000
   consumer:
     namesrvAddr: 192.168.133.130:9876
-    groupName: testGroup
     consumeThreadMin: 20
     consumeThreadMax: 64
   producerSize: 1

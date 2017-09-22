@@ -18,5 +18,130 @@
 			<groupId>com.book.management</groupId>
 			<artifactId>user-dto</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+		</dependency>
 	</dependencies>
+
+
+
+	<build>
+		<plugins>
+			<!-- -->
+			<plugin>
+				<groupId>plt.maven.plugins</groupId>
+				<artifactId>s2j-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>
+						    	s2j
+						  	</goal>
+						</goals>
+						<configuration>
+							<scanPacakge>com.book.user.api</scanPacakge>
+							<filterPath>/</filterPath>
+							<appTitle>an4</appTitle>
+							<appDescription>测试 </appDescription>
+							<serviceUrl>http://pc.shushuedu.com</serviceUrl>
+							<version>${project.version}</version>
+							<outJarFile>file:///${project.build.directory}/${project.artifactId}-${project.version}.jar</outJarFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-codegen-maven-plugin</artifactId>
+				<version>2.2.3</version>
+				<dependencies>
+					<dependency>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-codegen-cli</artifactId>
+						<version>2.2.3</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${basedir}/api.json</inputSpec>
+							<language>typescript-angular2</language>
+							<configOptions>
+								<npmName>c-t-test-user</npmName>
+								<npmVersion>${project.version}</npmVersion>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>plt.maven.plugins</groupId>
+				<artifactId>postg-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>
+			               	 	pg
+			              	</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+					<nodeVersion>v6.11.1</nodeVersion>
+					<workingDirectory>${project.build.directory}/generated-sources/swagger</workingDirectory>
+					<downloadRoot>https://npm.taobao.org/mirrors/node/</downloadRoot>
+					<nodeDownloadRoot>https://npm.taobao.org/mirrors/node/</nodeDownloadRoot>
+					<npmDownloadRoot>https://npm.taobao.org/mirrors/npm/</npmDownloadRoot>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>install</phase>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm publish</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>deploy</phase>
+						<configuration>
+							<arguments>publish .</arguments>
+							<npmRegistryURL>${npm.publish.registryURL}</npmRegistryURL>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

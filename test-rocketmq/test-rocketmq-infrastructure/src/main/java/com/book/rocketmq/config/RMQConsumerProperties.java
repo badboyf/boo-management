@@ -8,7 +8,6 @@ import lombok.Data;
 @ConfigurationProperties("rocketmq.consumer")
 public class RMQConsumerProperties {
 	private String namesrvAddr;
-	private String groupName;
 	private String topic;
 	private String tag;
 	private int consumeThreadMin;

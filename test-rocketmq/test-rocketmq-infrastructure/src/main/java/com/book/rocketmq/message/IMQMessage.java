@@ -8,4 +8,5 @@ public interface IMQMessage<T> {
 	String getTag();
 
 	T getMessage();
+
 }

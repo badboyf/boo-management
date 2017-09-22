@@ -17,7 +17,10 @@
     <module>file-upload</module>
     <module>eureka-test</module>
     <module>test-rocketmq</module>
-	</modules>
+    <module>security</module>
+    <module>url</module>
+    <module>lend-record</module>
+  </modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

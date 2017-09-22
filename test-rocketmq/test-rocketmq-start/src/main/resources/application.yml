@@ -3,14 +3,14 @@ server:
 
 rocketmq:
   producer:
-    groupName: testGroup
+    group: test-group
     namesrvAddr: 192.168.133.130:9876
     instanceName: testProducer
     maxMessageSize: 131072
     sendMsgTimeout: 10000
+    retryTimes: 3
+    defaultTopicQueueNums: 10
   consumer:
-    groupName: testGroup
     namesrvAddr: 192.168.133.130:9876
     consumeThreadMin: 20
     consumeThreadMax: 64
-  producerSize: 1

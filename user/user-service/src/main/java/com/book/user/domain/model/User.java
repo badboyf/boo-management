@@ -1,5 +1,7 @@
 package com.book.user.domain.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,6 +22,8 @@ public class User {
 	private String department;
 	private String avatar;
 	private String job;
+	
+	private List<String> roles;
 
 	@Version
 	private Integer version;

@@ -35,6 +35,11 @@
 			<groupId>com.book.management</groupId>
 			<artifactId>file-upload</artifactId>
 		</dependency>
+<!-- 		<dependency>
+			<groupId>com.book.management</groupId>
+			<artifactId>security</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency> -->
 	</dependencies>
 
 	<dependencyManagement>

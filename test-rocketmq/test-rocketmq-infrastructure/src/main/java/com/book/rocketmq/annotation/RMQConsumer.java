@@ -13,6 +13,8 @@ import com.book.rocketmq.message.IMQMessage;
 public @interface RMQConsumer {
 
 	Class<? extends IMQMessage<?>> message();
+	
+	String group() default "";
 
 	// Class<? extends RMQConsumerListenner> listener();
 }
